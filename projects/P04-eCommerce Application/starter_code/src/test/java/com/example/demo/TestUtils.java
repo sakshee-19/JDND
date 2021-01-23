@@ -9,12 +9,15 @@ public class TestUtils {
 
         try {
             Field field = target.getClass().getDeclaredField(fieldName);
-            if(!field.canAccess(field)){
+            System.out.println(fieldName);
+            System.out.println(field);
+            if(!field.canAccess(target)){
+//            if (!field.isAccessible()) {
                 field.setAccessible(true);
                 wasPrivate = true;
             }
             field.set(target, toInject);
-            if (wasPrivate){
+            if (wasPrivate) {
                 field.setAccessible(false);
             }
         } catch (NoSuchFieldException | IllegalAccessException e) {
